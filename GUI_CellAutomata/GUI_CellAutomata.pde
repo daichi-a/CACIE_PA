@@ -30,7 +30,7 @@ float[][] analizedPhotoData = new float[6][numberOfPhoto/2];
 
 OscP5 oscP5;
 NetAddress gpEngineAddr;
-NetAddress soundEngineAddr;
+NetAddress soundGPEngineAddr;
 
 int[] nextPageButton = new int[4];
 int[] initSoundEngineButton = new int[4];
@@ -66,7 +66,7 @@ void setup(){
     
     oscP5 = new OscP5(this, 12000);
     gpEngineAddr = new NetAddress("localhost", 57120);
-    soundEngineAddr = new NetAddress("localhost", 57120);
+    soundGPEngineAddr = new NetAddress("localhost", 57120);
     initGPEngine();
     
 }
@@ -357,7 +357,7 @@ void mousePressed(){
       mouseX <= nextPageButton[2] && 
       mouseY >= nextPageButton[1] && 
       mouseY <= nextPageButton[3]){
-	incrementPages();
+	      //incrementPages();
     }
     else if(mouseX >= initGPButton[0] && //Init All
 	    mouseX <= initGPButton[2] &&
@@ -660,12 +660,12 @@ void initSoundEngine(){
   for(int i=0; i<12; i++)
     chromosomeAreaHasChromosome[i] = false;
   OscMessage message = new OscMessage("/CACIE_PA/SoundEngine/initSoundEngine");
-  oscP5.send(message, soundEngineAddr);
+  oscP5.send(message, soundGPEngineAddr);
 }
 
 void playSound(){
   OscMessage message = new OscMessage("/CACIE_PA/SoundEngine/playSound");
-  oscP5.send(message, soundEngineAddr);
+  oscP5.send(message, soundGPEngineAddr);
 }
 
 void setChildrenChromosomeColor
