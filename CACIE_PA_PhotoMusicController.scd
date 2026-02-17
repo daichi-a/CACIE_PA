@@ -11,21 +11,21 @@
 
 ~initPhotoMusicGP = {
 //Add Function Nodes
-~defineFunctionNode.value(~func_plus = {arg a, b; if(a === €sCount, -1, a + b);};);
-~defineFunctionNode.value(~func_minus = {arg a, b; if(a === €sCount, -1, a - b);};);
-~defineFunctionNode.value(~func_mult = {arg a, b; if(a === €sCount, -1, a * b);};);
-~defineFunctionNode.value(~func_div = {arg a, b; if(a === €sCount, -1, a / b);};);
-~defineFunctionNode.value(~func_increment = {arg a; if(a === €sCount, 0, a + 1);};);
-~defineFunctionNode.value(~func_decrement = {arg a; if(a === €sCount, 0, a - 1);};);
+~defineFunctionNode.value(~func_plus = {arg a, b; if(a === \sCount, -1, a + b);};);
+~defineFunctionNode.value(~func_minus = {arg a, b; if(a === \sCount, -1, a - b);};);
+~defineFunctionNode.value(~func_mult = {arg a, b; if(a === \sCount, -1, a * b);};);
+~defineFunctionNode.value(~func_div = {arg a, b; if(a === \sCount, -1, a / b);};);
+~defineFunctionNode.value(~func_increment = {arg a; if(a === \sCount, 0, a + 1);};);
+~defineFunctionNode.value(~func_decrement = {arg a; if(a === \sCount, 0, a - 1);};);
 
 
 //Add Terminal Nodes
-~defineVariableTerminalNode.value(€rPerc0, 0.01);
-~defineVariableTerminalNode.value(€rPerc1, 0.01);
-~defineVariableTerminalNode.value(€gPerc0, 0.01);
-~defineVariableTerminalNode.value(€gPerc1, 0.01);
-~defineVariableTerminalNode.value(€bPerc0, 0.01);
-~defineVariableTerminalNode.value(€bPerc1, 0.01);
+~defineVariableTerminalNode.value(\rPerc0, 0.01);
+~defineVariableTerminalNode.value(\rPerc1, 0.01);
+~defineVariableTerminalNode.value(\gPerc0, 0.01);
+~defineVariableTerminalNode.value(\gPerc1, 0.01);
+~defineVariableTerminalNode.value(\bPerc0, 0.01);
+~defineVariableTerminalNode.value(\bPerc1, 0.01);
 
 for(0, 3, {arg i;~defineStaticTerminalNode.value(i*0.1);});
 };
@@ -34,7 +34,7 @@ for(0, 3, {arg i;~defineStaticTerminalNode.value(i*0.1);});
 ~oscPhotoMusicInitEngine = OSCresponderNode(nil, '/CACIE_PA/PhotoMusic/Controller/init/GPEngine', {
 	~initialPhaseGPEngine.value;
 	~initPhotoMusicGP.value;
-}).add; 
+}).add;
 
 ~oscPhotoMusicInitChildren.remove;
 ~oscPhotoMusicInitChildren = OSCresponderNode(nil, '/CACIE_PA/PhotoMusic/Controller/init/children', {
@@ -53,12 +53,12 @@ for(0, 3, {arg i;~defineStaticTerminalNode.value(i*0.1);});
 	//msg.postln;
 
 	for(0,3,{arg i;
-		~setValueOfVariableTerminalNode.value(€rPerc0, i, msg[1+(i*6)]);
-		~setValueOfVariableTerminalNode.value(€rPerc1, i, msg[1+(i*6)+1]);
-		~setValueOfVariableTerminalNode.value(€gPerc0, i, msg[1+(i*6)+2]);
-		~setValueOfVariableTerminalNode.value(€gPerc1, i, msg[1+(i*6)+3]);
-		~setValueOfVariableTerminalNode.value(€bPerc0, i, msg[1+(i*6)+4]);
-		~setValueOfVariableTerminalNode.value(€bPerc1, i, msg[1+(i*6)+5]);
+		~setValueOfVariableTerminalNode.value(\rPerc0, i, msg[1+(i*6)]);
+		~setValueOfVariableTerminalNode.value(\rPerc1, i, msg[1+(i*6)+1]);
+		~setValueOfVariableTerminalNode.value(\gPerc0, i, msg[1+(i*6)+2]);
+		~setValueOfVariableTerminalNode.value(\gPerc1, i, msg[1+(i*6)+3]);
+		~setValueOfVariableTerminalNode.value(\bPerc0, i, msg[1+(i*6)+4]);
+		~setValueOfVariableTerminalNode.value(\bPerc1, i, msg[1+(i*6)+5]);
 	});
 	~ontogenyAll.value;
 	for(0, 5, {arg i; for(0, 3, {arg j; ~soundEngineAddr.sendBundle(0.0, ["/CACIE_PA/SoundEngine/makeSequences", i, j]);});});
